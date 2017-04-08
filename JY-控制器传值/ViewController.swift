@@ -9,10 +9,21 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    let item = "swift"
+    
+    override func viewWillAppear(_ animated: Bool) {
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let subVC = SubViewController()
+        subVC.delegate = self
+        self.navigationController?.pushViewController(subVC, animated: true)
+        self.show(subVC, sender: self)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        self.view.backgroundColor = UIColor.blue
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,5 +32,11 @@ class ViewController: UIViewController {
     }
 
 
+}
+
+extension ViewController: SubViewControllerDelegate {
+    func vc(_ viewController: SubViewController, text: String?) {
+        print(text.debugDescription)
+    }
 }
 
